@@ -1,0 +1,37 @@
+---
+title: "Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(contextR)
+```
+
+`contextR` uses `context()` as the primary S3 API.
+
+```{r}
+fit_lm <- lm(mpg ~ wt + hp, data = mtcars)
+out_lm <- context(fit_lm, mode = "strict", analysis_context = "Fuel efficiency example")
+out_lm
+```
+
+```{r}
+tt <- t.test(mpg ~ am, data = mtcars)
+out_tt <- context(tt, mode = "safe")
+out_tt
+```
+
+Mock backend is default and does not require API keys.
+
+```{r, eval = requireNamespace("ggplot2", quietly = TRUE)}
+p <- ggplot2::ggplot(mtcars, ggplot2::aes(wt, mpg, colour = factor(cyl))) +
+  ggplot2::geom_point()
+
+p2 <- ggcontext(p, analysis_context = "Fuel economy comparison")
+p2
+```

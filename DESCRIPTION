@@ -1,0 +1,38 @@
+Package: contextR
+Title: Contextual Statistical Explanations with Structured S3 API
+Version: 0.2.0
+Authors@R: person("Aurelien", "Nicosia", email = "aurelien.nicosia@ulaval.ca", role = c("aut", "cre"))
+Author: Aurelien Nicosia [aut, cre]
+Maintainer: Aurelien Nicosia <aurelien.nicosia@ulaval.ca>
+Description: Provides a traceable and safety-oriented S3 API for contextual
+    statistical explanations. The package extracts structured numerical results
+    from statistical objects, builds prompts, generates explanations via
+    configurable backends, and enforces strict or safe validation checks.
+License: MIT + file LICENSE
+URL: https://github.com/AurelienNicosiaULaval/contextual-statistics-with-llm
+BugReports: https://github.com/AurelienNicosiaULaval/contextual-statistics-with-llm/issues
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends:
+    R (>= 4.1.0)
+Imports:
+    class,
+    jsonlite,
+    lifecycle,
+    rlang,
+    stats,
+    utils
+Suggests:
+    broom,
+    ellmer,
+    ggplot2,
+    knitr,
+    palmerpenguins,
+    rmarkdown,
+    scales,
+    testthat (>= 3.0.0),
+    vcd
+VignetteBuilder: knitr
+Config/testthat/edition: 3

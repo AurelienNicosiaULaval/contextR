@@ -1,0 +1,11 @@
+utils::globalVariables(c(
+    "Predicted",
+    "Actual",
+    "label",
+    "estimate",
+    "ic_inf",
+    "ic_sup",
+    "Var1",
+    "Var2",
+    "Correlation"
+))

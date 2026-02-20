@@ -1,0 +1,21 @@
+# R build/check artifacts
+*.tar.gz
+*.Rcheck/
+.Rcheck/
+..Rcheck/
+
+# R session/user files
+.Rhistory
+.RData
+.Ruserdata
+
+# IDE/system
+.Rproj.user/
+.DS_Store
+
+# pkgdown/docs build output
+docs/
+
+# coverage
+coverage/
+*.covr

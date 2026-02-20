@@ -1,0 +1,28 @@
+---
+title: "Strict mode and checks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Strict mode and checks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(contextR)
+```
+
+Strict mode enforces number consistency and language rules.
+
+```{r}
+fit <- lm(mpg ~ wt, data = mtcars)
+out <- context(fit, mode = "strict")
+context_audit(out)
+```
+
+Use `safe` mode for sanitization instead of hard failure.
+
+```{r}
+out_safe <- context(fit, mode = "safe")
+out_safe
+```

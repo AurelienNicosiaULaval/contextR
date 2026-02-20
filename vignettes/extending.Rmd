@@ -1,0 +1,33 @@
+---
+title: "Extending contextR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Extending contextR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(contextR)
+```
+
+To add a new class method:
+
+1. Create an extractor returning a structured `extracted` list.
+2. Add `context.<class>` method calling `.context_run_pipeline()`.
+3. Add tests validating extraction and checks.
+
+Skeleton:
+
+```{r, eval = FALSE}
+.context_extract_myclass <- function(x) {
+  list(kind = "myclass", summary = data.frame(value = 1))
+}
+
+context.myclass <- function(x, mode = c("strict", "safe", "free"), backend = context_backend_get(), analysis_context = NULL, ...) {
+  mode <- match.arg(mode)
+  extracted <- .context_extract_myclass(x)
+  .context_run_pipeline(x, extracted, mode, backend, analysis_context)
+}
+```

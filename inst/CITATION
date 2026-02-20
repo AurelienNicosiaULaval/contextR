@@ -1,0 +1,10 @@
+citHeader("To cite contextR in publications, use:")
+
+citEntry(
+  entry = "Manual",
+  title = "contextR: Contextual Statistical Explanations with Structured S3 API",
+  author = personList(person(given = "Aurélien", family = "Nicosia")),
+  year = "2026",
+  note = "R package version 0.2.0",
+  url = "https://github.com/AurelienNicosiaULaval/contextual-statistics-with-llm"
+)
