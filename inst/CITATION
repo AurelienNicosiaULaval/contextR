@@ -6,5 +6,5 @@ citEntry(
   author = personList(person(given = "Aurélien", family = "Nicosia")),
   year = "2026",
   note = "R package version 0.2.0",
-  url = "https://github.com/AurelienNicosiaULaval/contextual-statistics-with-llm"
+  url = "https://github.com/AurelienNicosiaULaval/contextR"
 )

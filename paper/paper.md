@@ -2,12 +2,15 @@
 title: "contextR: Traceable Statistical Explanations in R with S3 Contextualization and Safety Checks"
 authors:
   - name: Aurelien Nicosia
-    affiliations: Université Laval
+    affiliation: "1"
+affiliations:
+  - name: Universite Laval
+    index: 1
 date: 2026-02-14
 keywords:
   - contextual statistics
 type: software
-repository-code: https://github.com/AurelienNicosiaULaval/contextual-statistics-with-llm
+repository-code: https://github.com/AurelienNicosiaULaval/contextR
 summary: |
   contextR provides an S3-based API (`context()`) for producing
   audit-traceable contextual interpretations of common statistical objects.
@@ -161,7 +164,7 @@ if (requireNamespace("ggplot2", quietly = TRUE)) {
 `contextR` is available in source form as `contextR/` in the repository.
 
 ```text
-https://github.com/AurelienNicosiaULaval/contextual-statistics-with-llm
+https://github.com/AurelienNicosiaULaval/contextR
 ```
 
 The package is MIT-licensed. Full installation instructions, examples,

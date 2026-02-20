@@ -9,8 +9,8 @@ Description: Provides a traceable and safety-oriented S3 API for contextual
     from statistical objects, builds prompts, generates explanations via
     configurable backends, and enforces strict or safe validation checks.
 License: MIT + file LICENSE
-URL: https://github.com/AurelienNicosiaULaval/contextual-statistics-with-llm
-BugReports: https://github.com/AurelienNicosiaULaval/contextual-statistics-with-llm/issues
+URL: https://github.com/AurelienNicosiaULaval/contextR
+BugReports: https://github.com/AurelienNicosiaULaval/contextR/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

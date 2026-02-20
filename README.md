@@ -1,36 +1,44 @@
 # contextR
 
-`contextR` provides a structured S3 API for contextual statistical explanations.
+[![R-CMD-check](https://github.com/AurelienNicosiaULaval/contextR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/AurelienNicosiaULaval/contextR/actions/workflows/R-CMD-check.yaml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Core API
+`contextR` helps you turn statistical results into readable, traceable explanations.
 
-- `context(x, mode = c("strict", "safe", "free"), ...)`
-- `ggcontext(plot, ...)` for contextual ggplot labeling
-- `context_backend_get()`, `context_backend_set()`, `context_backend_reset()`
-- `context_audit(x)`
+The package is built around one S3 generic, `context()`, with class-specific methods for common statistical objects.
+It also includes `ggcontext()` to suggest cleaner ggplot labels from mapping and data context.
 
-`ggcontext()` is hardened for imperfect LLM outputs: it attempts strict JSON parsing first, then key-value fallback parsing, and finally keeps plots stable with safe defaults.
+## Why contextR?
 
-Default backend is `mock` and does not use network access.
+- A single entry point: `context(x, ...)` with S3 dispatch.
+- Structured output: every run returns a `contextual` object with source object, extracted values, prompt, backend metadata, checks, and session trace.
+- Safer defaults: backend is `mock` by default (no network).
+- Explicit reliability modes: `strict`, `safe`, and `free`.
+- Compatibility retained: legacy `*_context()` wrappers still work with deprecation warnings.
 
-## Supported S3 methods
+## Supported classes
 
-- `context.htest`
-- `context.lm`
-- `context.glm`
-- `context.aov`
-- `context.anova`
-- `context.prcomp`
-- `context.Arima`
-- `context.context_cor_input`
-- `context.context_knn_input`
-
-Legacy wrappers are still available (`lm_context`, `t_test_context`, etc.) and emit lifecycle deprecation warnings.
+- `htest` (`t.test`, `cor.test`, `chisq.test`, `prop.test`, ...)
+- `lm`
+- `glm`
+- `aov` and `anova`
+- `prcomp`
+- `Arima`
+- `context_cor_input`
+- `context_knn_input`
 
 ## Installation
 
+From GitHub:
+
 ```r
-remotes::install_local("contextR")
+remotes::install_github("AurelienNicosiaULaval/contextR")
+```
+
+From local source:
+
+```r
+remotes::install_local(".")
 ```
 
 ## Quick start
@@ -38,31 +46,65 @@ remotes::install_local("contextR")
 ```r
 library(contextR)
 
-# backend is mock by default
+# Default backend: mock (deterministic, no network)
 fit <- lm(mpg ~ wt + hp, data = mtcars)
-out <- context(fit, mode = "strict", analysis_context = "Cars fuel efficiency analysis")
+out <- context(
+  fit,
+  mode = "strict",
+  analysis_context = "Fuel efficiency analysis"
+)
+
 print(out)
 context_audit(out)
 ```
 
-## Real backends (optional)
+## ggcontext example
 
 ```r
-context_backend_set("ollama", model = "mistral")
-# or
-context_backend_set("openai", model = "gpt-4o-mini")
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg, colour = factor(cyl))) +
+  geom_point()
+
+p2 <- ggcontext(p, analysis_context = "Fuel economy comparison")
+p2
 ```
 
-These modes require `ellmer` and configured credentials/runtime.
+## Backends
 
-## Limitations
+Backend handling is explicit and configurable:
 
-- Strict mode rejects explanations containing unauthorized numbers or risky causal language.
-- Legacy visualization helpers (`boxplot_context`, `scatterplot_context`) are maintained but outside the new `context()` pipeline.
-- `context()` does not call external services unless backend is explicitly set to `openai` or `ollama`.
+```r
+context_backend_get()
+context_backend_set("ollama", model = "mistral")
+context_backend_set("openai", model = "gpt-4o-mini")
+context_backend_reset()
+```
 
-## Article
+Real backends require `ellmer` plus local runtime/credentials.
+Tests and CI are run with the `mock` backend (no external API calls).
 
-- `paper/paper.md` and `paper/paper.bib` contain a JOSS-ready draft.
-- A useful next step is to validate the draft with the `joss` tooling and
-  finalize references and author metadata before submission.
+## Reproducibility and checks
+
+Each `contextual` object stores:
+
+- extracted numeric values
+- final prompt
+- backend metadata
+- generated explanation
+- check results (numeric grounding and language flags)
+- timestamp and session metadata
+
+`strict` mode fails on unauthorized numeric claims or risky causal phrasing.
+
+## Legacy API
+
+Legacy helpers (`lm_context()`, `t_test_context()`, etc.) are still available for migration.
+They call the new pipeline and emit deprecation warnings via `lifecycle`.
+
+## Manuscript
+
+A JOSS draft is available in:
+
+- `paper/paper.md`
+- `paper/paper.bib`

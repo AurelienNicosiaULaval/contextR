@@ -1,0 +1,9 @@
+^\\.git$
+^\\.github$
+^\\.gitignore$
+^\\.Rproj\\.user$
+^contextR\\.Rcheck$
+^\\.Rcheck$
+^\\.\\.Rcheck$
+^paper$
+^.*\\.tar\\.gz$
