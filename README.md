@@ -8,6 +8,14 @@
 The package is built around one S3 generic, `context()`, with class-specific methods for common statistical objects.
 It also includes `ggcontext()` to suggest cleaner ggplot labels from mapping and data context.
 
+## Part of the research ecosystem
+
+This repository is part of Aurélien Nicosia's open research and teaching ecosystem in computational statistics, scientific R software, reproducible data science and statistical education.
+
+* Research Lab: [https://aureliennicosiaulaval.github.io/web_site/research-lab.html](https://aureliennicosiaulaval.github.io/web_site/research-lab.html)
+* GitHub profile: [https://github.com/AurelienNicosiaULaval](https://github.com/AurelienNicosiaULaval)
+* Related projects: none listed yet; this emerging project is currently linked through the Research Lab page.
+
 ## Why contextR?
 
 - A single entry point: `context(x, ...)` with S3 dispatch.
